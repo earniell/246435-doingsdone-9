@@ -1,43 +1,43 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-$projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+$projects = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
 $tasks = [
     [
-        "name" => "Собеседование в IT компании",
-        "date" => "01.12.2018",
-        "category" => "Работа",
-        "status" => "Нет",
+        'name' => 'Собеседование в IT компании',
+        'date' => '01.12.2018',
+        'category' => 'Работа',
+        'status' => 'Нет',
     ],
     [
-        "name" => "Выполнить тестовое задание",
-        "date" => "25.12.2018",
-        "category" => "Работа",
-        "status" => "Нет",
+        'name' => 'Выполнить тестовое задание',
+        'date' => '25.12.2018',
+        'category' => 'Работа',
+        'status' => 'Нет',
     ],
     [
-    "name" => "Сделать задание первого раздела",
-    "date" => "21.12.2018",
-    "category" => "Учеба",
-    "status" => "Да",
+        'name' => 'Сделать задание первого раздела',
+        'date' => '21.12.2018',
+        'category' => 'Учеба',
+        'status' => 'Да',
     ],
     [
-    "name" => "Встреча с другом",
-    "date" => "22.12.2018",
-    "category" => "Входящие",
-    "status" => "Нет",
+        'name' => 'Встреча с другом',
+        'date' => '22.12.2018',
+        'category' => 'Входящие',
+        'status' => 'Нет',
     ],
     [
-    "name" => "Купить корм для кота",
-    "date" => "Нет",
-    "category" => "Домашние дела",
-    "status" => "Нет",
+        'name' => 'Купить корм для кота',
+        'date' => 'Нет',
+        'category' => 'Домашние дела',
+        'status' => 'Нет',
     ],
     [
-    "name" => "Заказать пиццу",
-    "date" => "Нет",
-    "category" => "Домашние дела",
-    "status" => "Нет",
+        'name' => 'Заказать пиццу',
+        'date' => 'Нет',
+        'category' => 'Домашние дела',
+        'status' => 'Нет',
     ],
 ];
 ?>
@@ -59,7 +59,8 @@ $tasks = [
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить задачу</a>
+                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить
+                    задачу</a>
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
                         <p>Константин</p>
@@ -73,13 +74,13 @@ $tasks = [
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                         <?php foreach ($tasks as $key => $val) { ?>
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">
-                              <?= $val["name"]; ?>
-                            </a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        <?php foreach ($tasks as $key => $val) { ?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#">
+                                    <?= $val['name'] ?>
+                                </a>
+                                <span class="main-navigation__list-item-count">0</span>
+                            </li>
                         <?php } ?>
                     </ul>
                 </nav>
@@ -107,17 +108,18 @@ $tasks = [
                 </div>
                 <table class="tasks">
                     <?php foreach ($tasks as $key => $val) { ?>
-                    <tr class="tasks__item task
-                    <?php if($val["status"] == "Да") { if ($show_complete_tasks == 0) { ?> hidden <?php }; ?> task--completed <?php };?>">
-                        <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                <span class="checkbox__text"><?= $val["name"]; ?></span>
-                            </label>
-                        </td>
-                        <td class="task__date"><?= $val["date"]; ?></td>
-                        <td class="task__controls"><?= $val["status"]; ?></td>
-                    </tr>
+                        <tr class="tasks__item task
+                    <?php if ($val['status'] == 'Да') {
+                            if ($show_complete_tasks == 0) { ?> hidden <?php } ?> task--completed <?php } ?>">
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
+                                    <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                    <span class="checkbox__text"><?= $val['name']; ?></span>
+                                </label>
+                            </td>
+                            <td class="task__date"><?= $val['date']; ?></td>
+                            <td class="task__controls"><?= $val['status']; ?></td>
+                        </tr>
                     <?php } ?>
                 </table>
             </main>
