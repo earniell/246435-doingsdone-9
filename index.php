@@ -2,6 +2,7 @@
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 $projects = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
+
 $tasks = [
     [
         'name' => 'Собеседование в IT компании',
@@ -40,7 +41,19 @@ $tasks = [
         'status' => 'Нет',
     ],
 ];
+
+function get_category_num($task_list, $category_name) {
+    $index = 0;
+    foreach ($task_list as $val) {
+        if ($val['category'] == $category_name) {
+            $index++;
+        };
+    };
+    return $index;
+};
 ?>
+
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -74,14 +87,15 @@ $tasks = [
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($tasks as $key => $val) { ?>
+                        <?php foreach ($projects as $val) : ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#">
-                                    <?= $val['name'] ?>
-                                </a>
-                                <span class="main-navigation__list-item-count">0</span>
+                                    <?= $val ?></a>
+                                <span class="main-navigation__list-item-count">
+                              <?= get_category_num($tasks, $val); ?>
+                            </span>
                             </li>
-                        <?php } ?>
+                        <?php endforeach; ?>
                     </ul>
                 </nav>
                 <a class="button button--transparent button--plus content__side-button"
