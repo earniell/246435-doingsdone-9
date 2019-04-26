@@ -6,5 +6,18 @@
         $index++;
         };
     };
-return $index;
+    return $index;
 };
+    function getDateInterval($projectDate) {
+    $projectDateTimestamp = strtotime($projectDate);
+    $currentDate = time();
+    $dateInterval = ($projectDateTimestamp - $currentDate);
+    $secondInDay = 86400;
+
+    if ($dateInterval <= $secondInDay) {
+        if ($dateInterval > 0) {
+            print('task--important');
+        };
+    };
+};
+

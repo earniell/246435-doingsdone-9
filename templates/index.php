@@ -20,15 +20,19 @@
     <table class="tasks">
         <?php foreach ($tasks as $key => $val) { ?>
             <tr class="tasks__item task
-        <?php if ($val['status'] == 'Да') {
+                <?= getDateInterval($val['date']); ?>
+                <?php if ($val['status'] == 'Да') {
                 if ($show_complete_tasks == 0) { ?> hidden <?php } ?> task--completed <?php } ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                        <span class="checkbox__text"><?= $val['name']; ?></span>
+                        <span class="checkbox__text">
+                        	<?= htmlspecialchars($val['name']); ?>
+                        </span>
                     </label>
                 </td>
-                <td class="task__date"><?= $val['date']; ?></td>
+                <td class="task__date">
+                    <?= $val['date']; ?></td>
                 <td class="task__controls"><?= $val['status']; ?></td>
             </tr>
         <?php } ?>

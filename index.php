@@ -15,6 +15,9 @@ $layout_content = include_template('layout.php', [
     'content' => $page_content,
     'projects' => $projects,
     'title' => 'Дела в порядке',
+    '$projectDate' => $projectDate,
+    'currentDate' => $currentDate,
+    'dateInterval' => $dateInterval,
 ]);
 
 print($layout_content);
