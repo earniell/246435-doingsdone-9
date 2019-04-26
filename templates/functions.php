@@ -8,16 +8,13 @@
     };
     return $index;
 };
-    function getDateInterval($projectDate) {
-    $projectDateTimestamp = strtotime($projectDate);
-    $currentDate = time();
-    $dateInterval = ($projectDateTimestamp - $currentDate);
-    $secondInDay = 86400;
 
-    if ($dateInterval <= $secondInDay) {
-        if ($dateInterval > 0) {
-            print('task--important');
-        };
-    };
+    function isDeadlineClose($projectDate) {
+    $projectDateTimestamp = strtotime($projectDate);
+    $dateInterval = ($projectDateTimestamp - time());
+    $secondsInDay = 86400;
+
+    return $dateInterval <= $secondsInDay && $dateInterval > 0;
 };
+
 
