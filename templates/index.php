@@ -20,7 +20,7 @@
     <table class="tasks">
         <?php foreach ($tasks as $key => $val) { ?>
             <tr class="tasks__item task
-                <?= isDeadlineClose($val['date']) ? 'task--important' : ''>
+                <?= isDeadlineClose($val['date']) ? 'task--important' : '' ?>
                 <?php if ($val['status'] == 'Да') {
                 if ($show_complete_tasks == 0) { ?> hidden <?php } ?> task--completed <?php } ?>">
                 <td class="task__select">
