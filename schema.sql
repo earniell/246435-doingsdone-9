@@ -20,6 +20,7 @@ CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT NOT NULL,
     id_project INT NOT NULL,
+    file CHAR,
     dt_add TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     name CHAR(128) NOT NULL,
     dt_end CHAR(10),
