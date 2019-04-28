@@ -6,5 +6,15 @@
         $index++;
         };
     };
-return $index;
+    return $index;
 };
+
+    function isDeadlineClose($projectDate) {
+    $projectDateTimestamp = strtotime($projectDate);
+    $dateInterval = ($projectDateTimestamp - time());
+    $secondsInDay = 86400;
+
+    return $dateInterval <= $secondsInDay && $dateInterval > 0;
+};
+
+
