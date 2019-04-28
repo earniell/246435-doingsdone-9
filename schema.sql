@@ -5,6 +5,7 @@ USE doingsdone;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    dt_add CHAR(10),
     name CHAR(64) NOT NULL,
     email CHAR(128) NOT NULL UNIQUE,
     password CHAR(64) NOT NULL UNIQUE
@@ -12,7 +13,6 @@ CREATE TABLE users (
 
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    id_user INT NOT NULL,
     name CHAR(128) NOT NULL
 );
 
