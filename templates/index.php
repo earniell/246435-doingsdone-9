@@ -20,8 +20,8 @@
     <table class="tasks">
         <?php foreach ($tasks as $key => $val) { ?>
             <tr class="tasks__item task
-                <?= isDeadlineClose($val['date']) ? 'task--important' : '' ?>
-                <?php if ($val['status'] == 'Да') {
+                <?= isDeadlineClose($val['dt_end']) ? 'task--important' : '' ?>
+                <?php if ($val['status'] == '1') {
                 if ($show_complete_tasks == 0) { ?> hidden <?php } ?> task--completed <?php } ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
@@ -32,7 +32,7 @@
                     </label>
                 </td>
                 <td class="task__date">
-                    <?= $val['date']; ?></td>
+                    <?= $val['dt_end']; ?></td>
                 <td class="task__controls"><?= $val['status']; ?></td>
             </tr>
         <?php } ?>
