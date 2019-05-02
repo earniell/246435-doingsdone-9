@@ -2,7 +2,7 @@
 function getCategoryNum($task_list, $category_name) {
     $index = 0;
     foreach ($task_list as $key => $val) {
-        if ($val['id'] == $category_name) {
+        if ($val['id_project'] == $category_name) {
             $index++;
         };
     };
@@ -16,6 +16,7 @@ function isDeadlineClose($projectDate) {
 
     return $dateInterval <= $secondsInDay && $dateInterval > 0;
 };
+
 
 
 
