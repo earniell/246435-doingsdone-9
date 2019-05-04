@@ -21,7 +21,10 @@ else {
         $page_content = include_template('error.php', ['error' => $error]);
     }
 
-    $sql = 'SELECT * FROM tasks';
+    $sql = 'SELECT t.id, id_project, file, dt_end, t.name, dt_end, status, p.id 
+            FROM tasks t
+            JOIN projects p
+            ON t.id_project = p.id';
     $result = mysqli_query($connect, $sql);
     if ($result) {
         $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
