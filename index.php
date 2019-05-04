@@ -21,7 +21,7 @@ else {
         $page_content = include_template('error.php', ['error' => $error]);
     }
 
-    $sql = 'SELECT t.id, id_project, file, dt_end, t.name, dt_end, status, p.id 
+    $sql = 'SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id 
             FROM tasks t
             JOIN projects p
             ON t.id_project = p.id';
