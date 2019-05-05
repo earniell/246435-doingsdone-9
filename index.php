@@ -24,7 +24,9 @@ else {
     $sql = 'SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id 
             FROM tasks t
             JOIN projects p
-            ON t.id_project = p.id';
+            ON t.id_project = p.id
+            WHERE id_user = 1
+            ORDER BY dt_add ASC';
     $result = mysqli_query($connect, $sql);
     if ($result) {
         $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
