@@ -32,12 +32,13 @@
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $key => $val) : ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#">
+                            <li class="main-navigation__list-item 
+                            <?= $_GET['id'] == $val['id'] ? 'main-navigation__list-item--active' : '' ?>">
+                                <a class="main-navigation__list-item-link" href="/?id=<?= $val['id'] ?>">
                                     <?= $val['name'] ?>
                                 </a>
                                 <span class="main-navigation__list-item-count">
-                                <?= getCategoryNum($tasks, $val['id']);?>
+                                <?= $val['tasks_count']; ?>                         
                                 </span>
                             </li>
                         <?php endforeach; ?>

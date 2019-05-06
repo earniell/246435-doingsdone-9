@@ -4,8 +4,13 @@ SET dt_add = NOW(), name = 'John Snow', email = 'john_snow@stark.ws', password =
 INSERT INTO users
 SET dt_add = NOW(), name = 'Bran Stark', email = 'bran_stark@stark.ws', password = '3eyedRaven';
 
+INSERT INTO users
+SET dt_add = NOW(), name = 'Arya Stark', email = 'arya_stark@stark.ws', password = 'ValaMorghulis';
+
 INSERT INTO projects (id_user, name)
-VALUES (1,'Входящие'), (1, 'Учеба'), (2, 'Работа'), (3, 'Домашние дела'), (1, 'Авто');
+VALUES (1,'Входящие'), (1, 'Учеба'), (1, 'Работа'), (1, 'Домашние дела'), (1, 'Авто'), (2,'Входящие'),
+(2, 'Учеба'), (2, 'Работа'), (2, 'Домашние дела'), (2, 'Авто'),
+(3,'Входящие'), (3, 'Учеба'), (3, 'Работа'), (3, 'Домашние дела'), (3, 'Авто');
 
 INSERT INTO tasks
 SET id_project = 3, dt_add = NOW(), name = 'Собеседование в IT компании', dt_end = '01.01.2019',
@@ -28,6 +33,22 @@ SET id_project = 4, dt_add = NOW(), name = 'Купить корм для кот�
 
 INSERT INTO tasks
 SET id_project = 4, dt_add = NOW(), name = 'Заказать пиццу', status = FALSE;
+
+INSERT INTO tasks
+SET id_project = 1, dt_add = NOW(), name = 'Встретить Бранна', dt_end = '07.05.2019' status = FALSE;
+
+INSERT INTO tasks
+SET id_project = 5, dt_add = NOW(), name = 'Покормить коня', dt_end = '07.06.2019' status = FALSE;
+
+INSERT INTO tasks
+SET id_project = 2, dt_add = NOW(), name = 'Потренировать Сэма', dt_end = '17.05.2019' status = FALSE;
+
+INSERT INTO tasks
+SET id_project = 3, dt_add = NOW(), name = 'Найти короля Ночи', dt_end = '31.12.2019' status = FALSE;
+
+INSERT INTO tasks
+SET id_project = 3, dt_add = NOW(), name = 'Стать Королем Севера', dt_end = '01.07.2019' status = FALSE;
+
 
 SELECT t.id_project FROM tasks t
 JOIN projects p
