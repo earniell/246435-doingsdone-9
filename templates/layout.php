@@ -20,7 +20,7 @@
                     задачу</a>
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
-                        <p>Константин</p>
+                        <p>John Snow</p>
                         <a href="#">Выйти</a>
                     </div>
                 </div>
@@ -31,13 +31,14 @@
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($projects as $val) : ?>
+                        <?php foreach ($projects as $key => $val) : ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="#">
-                                    <?= $val ?></a>
+                                    <?= $val['name'] ?>
+                                </a>
                                 <span class="main-navigation__list-item-count">
-                              <?= getCategoryNum($tasks, $val); ?>
-                            </span>
+                                <?= getCategoryNum($tasks, $val['id']);?>
+                                </span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
