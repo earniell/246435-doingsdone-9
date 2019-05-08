@@ -10,12 +10,12 @@ require_once ('templates\data.php');
 if (!$connect) {
     $error = mysqli_connect_error();
     $page_content = include_template('error.php', ['error' => $error]);
-    }
-    else {
+}
+else {
 
 // Если соеднились с БД, то показать список проектов и счетчик задач в проектах у id_user = 1
 
-    $sql_projects_count = 'SELECT p.id, id_user, p.name, COUNT(*) tasks_count 
+    $sql_projects_count = 'SELECT p.id, id_user, p.name, COUNT(*) tasks_count
             FROM projects p 
             JOIN tasks t
             ON p.id = t.id_project 
@@ -27,14 +27,14 @@ if (!$connect) {
 // записать данные в массив $projects
 
     if ($result) {
-    $projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    } 
+        $projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
     else {
         $error = mysqli_error($connect);
-        $page_content = include_template('error.php', ['error' => $error]);	
+        $page_content = include_template('error.php', ['error' => $error]);
     }
 
-// Показ списка задач для id_user = 1
+// Далее показать список задач для текущего id_user.
 
     $sql_tasks_user = 'SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id  
             FROM tasks t 
@@ -43,45 +43,68 @@ if (!$connect) {
             WHERE id_user = 1
             ORDER BY dt_add ASC';
 
-// Показ списка задач в соответствии с id (ссылка) выбранного проекта. 
-// Условие возвращает ошибку при пустом или нулевом запросе 
+//А если будет запрос (нажата ссылка), то показать список задач в соответствии с id (ссылка) выбранного проекта.
+
 
     if (isset($_GET['id'])) {
-    $show_category = intval($_GET['id']);  // intval($_GET['id']) принудительно приведет в число
-        
+
+        $show_category = intval($_GET['id']);
+
+        // Получаем id задач для текущего user
+
+        $sql_id_tasks = 'SELECT id_project, p.id_user  
+                     FROM tasks t
+                     JOIN projects p 
+                     ON t.id_project = p.id
+                     WHERE p.id_user = 1';
+
+        $result = mysqli_query($connect, $sql_id_tasks);
+
+        // Записываем выборку в массив $id_tasks
+
+        if ($result) {
+            $id_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        }
+
+        // Проверяем есть ли значение переменной $show_category в списке $id_tasks
+
+        if (!in_array($show_category, array_column($id_tasks, 'id_project'))) {
+            http_response_code(404);
+            header("Location: pages/404.html");
+            exit();
+        }
+
         if ($show_category <= 0) {
             http_response_code(404);
             header("Location: pages/404.html");
             exit();
-        }  
-    
-    $sql_tasks_user = 'SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id ' 
-         . 'FROM tasks t '
-         . 'JOIN projects p ' 
-         . 'ON t.id_project = p.id '
-         . 'WHERE t.id_project =  '
-         . $show_category;  
+        }
+
+        $sql_tasks_user = "SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id  
+                       FROM tasks t
+                       JOIN projects p 
+                       ON t.id_project = p.id 
+                       WHERE t.id_project = '$show_category'";
     }
- 
-    
-// Возвращает значения из БД
+
+    // Записываем ту или иную выборку в массив $tasks
 
     $result = mysqli_query($connect, $sql_tasks_user);
     if ($result) {
 
-    $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
     else {
-       $error = mysqli_error($connect);
-       $page_content = include_template('error.php', ['error' => $error]);	
+        $error = mysqli_error($connect);
+        $page_content = include_template('error.php', ['error' => $error]);
     }
 }
 
-// Вывод HTML 
+// Вывод HTML
 
 $page_content = include_template('index.php', [
-	'tasks' => $tasks, 
-	'show_complete_tasks' => $show_complete_tasks,
+    'tasks' => $tasks,
+    'show_complete_tasks' => $show_complete_tasks,
 ]);
 $layout_content = include_template('layout.php', [
     'tasks' => $tasks,
@@ -92,3 +115,4 @@ $layout_content = include_template('layout.php', [
 ]);
 
 print($layout_content);
+
