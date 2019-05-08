@@ -2,8 +2,8 @@
 
 require_once ('init.php');
 require_once ('templates\functions.php');
-require_once ('helpers.php');
 require_once ('templates\data.php');
+require_once ('helpers.php');
 
 // Если не удалось подключиться к БД, выводить ошибку
 
@@ -41,44 +41,48 @@ else {
             JOIN projects p 
             ON t.id_project = p.id
             WHERE id_user = 1
-            ORDER BY dt_add ASC';
+            ORDER BY dt_add DESC';
 
-    // Получаем id задач для текущего user
+//А если будет запрос (нажата ссылка), то показать список задач в соответствии с id (ссылка) выбранного проекта.
 
-    $sql_id_tasks = 'SELECT id_project, p.id_user  
+
+    if (isset($_GET['id'])) {
+
+        $show_category = intval($_GET['id']);
+
+        // Получаем id задач для текущего user
+
+        $sql_id_tasks = 'SELECT id_project, p.id_user  
                      FROM tasks t
                      JOIN projects p 
                      ON t.id_project = p.id
                      WHERE p.id_user = 1';
 
-    $result = mysqli_query($connect, $sql_id_tasks);
+        $result = mysqli_query($connect, $sql_id_tasks);
 
-    // Записываем выборку в массив $id_tasks
+        // Записываем выборку в массив $id_tasks
 
-    if ($result) {
-        $id_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
+        if ($result) {
+            $id_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        }
 
-    // Создаем переменную, в которой будет значение запрашиваемого id в числовом выражении
+        // Проверяем есть ли значение переменной $show_category в списке $id_tasks
 
-    $show_category = intval($_GET['id']);
+        if (!isset($_GET['id']) || !in_array($show_category, array_column($id_tasks, 'id_project'))) {
+            http_response_code(404);
+            header("Location: pages/404.html");
+            exit();
+        }
 
-    // Проверяем на пустой запрос (если id не был передан) и на запрос id, которого нет в массиве $id_tasks
 
-    if (!isset($_GET['id']) || !in_array($show_category, array_column($id_tasks, 'id_project'))) {
-
-        http_response_code(404);
-        header("Location: pages/404.html");
-        exit();
-    }
-
-    $sql_tasks_user = "SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id  
+        $sql_tasks_user = "SELECT t.id, id_project, file, dt_add, t.name, dt_end, status, p.id  
                        FROM tasks t
                        JOIN projects p 
                        ON t.id_project = p.id 
                        WHERE t.id_project = '$show_category'";
     }
-// Записываем ту или иную выборку в массив $tasks
+
+    // Записываем ту или иную выборку в массив $tasks
 
     $result = mysqli_query($connect, $sql_tasks_user);
     if ($result) {
