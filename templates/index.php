@@ -33,7 +33,7 @@
                 </td>
                 <td class="task__date">
                     <?= $val['dt_end']; ?></td>
-                <td class="task__controls"><?= $val['status']; ?></td>
+                <!--<td class="task__controls"><?= $val['status']; ?></td> -->
             </tr>
         <?php } ?>
     </table>
