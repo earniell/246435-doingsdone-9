@@ -16,7 +16,7 @@
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="pages/form-task.html">Добавить
+                <a class="main-header__side-item button button--plus open-modal" href="/add_task.php">Добавить
                     задачу</a>
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__data">
@@ -32,22 +32,22 @@
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $key => $val) : ?>
-                            <li class="main-navigation__list-item 
+                            <li class="main-navigation__list-item
                             <?= $_GET['id'] == $val['id'] ? 'main-navigation__list-item--active' : '' ?>">
                                 <a class="main-navigation__list-item-link" href="/?id=<?= $val['id'] ?>">
                                     <?= $val['name'] ?>
                                 </a>
                                 <span class="main-navigation__list-item-count">
-                                <?= $val['tasks_count']; ?>                         
+                                <?= $val['tasks_count']; ?>
                                 </span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
                 </nav>
                 <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+                   href="#" target="project_add">Добавить проект</a>
             </section>
-            <main>
+            <main class="content__main">
                 <?= $content; ?>
             </main>
         </div>
@@ -59,7 +59,7 @@
             <p>© 2019, «Дела в порядке»</p>
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
-        <a class="main-footer__button button button--plus" href="pages/form-task.html">Добавить задачу</a>
+        <a class="main-footer__button button button--plus" href="/add_task.php">Добавить задачу</a>
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
             <a class="social__link social__link--facebook" href="#">

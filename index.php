@@ -1,9 +1,8 @@
 <?php
 
 require_once ('init.php');
-require_once ('templates\functions.php');
+require_once ('functions.php');
 require_once ('templates\data.php');
-require_once ('helpers.php');
 
 // Если не удалось подключиться к БД, выводить ошибку
 
@@ -70,7 +69,7 @@ else {
 
         if (!isset($_GET['id']) || !in_array($show_category, array_column($id_tasks, 'id_project'))) {
             http_response_code(404);
-            header("Location: pages/404.html");
+            header('Location: pages/404.html');
             exit();
         }
 
@@ -110,4 +109,3 @@ $layout_content = include_template('layout.php', [
 ]);
 
 print($layout_content);
-
